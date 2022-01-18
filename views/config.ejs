@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Config</title>
+</head>
+<body>
+    <main>
+        <form method="POST" action="/changes/ <%= tasks.id %>">
+            <select required name="status">
+                <option value="" disabled selected> Select your stage of production </option>
+                <option value="Pending">Pending</option>
+                <option value="In Proccess">In Proccess</option>
+                <option value="Completed">Completed</option>
+            </select>
+
+            <input name="task" value="<%= tasks.task %>" type="text"/>
+            <input type="submit" value="Change" />
+        </form>
+
+    </main>
+    
+</body>
+</html>

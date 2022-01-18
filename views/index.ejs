@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do List</title>
+</head>
+<body>
+    <main>
+        <form method="post" action="/task">
+            <label class="field">
+                <input required type="text" name="task"/>
+            </label>
+            <input type="submit" value="Confirm Task"/>
+
+        </form>
+
+        <section class="table">
+            <table>
+                <tr>
+                    <th>Status</th>
+                    <th>Task</th>
+                </tr>
+                <% for(x=0; x < size; x++ ){  %>
+                <tr>
+                    <td><%= tasks[x].status %></td>
+                    <td><%= tasks[x].task %></td>
+                    <td>  <a href="/config/<%= tasks[x].id %>">  <span class="iconify" data-icon="mdi:cog-outline"></span>  </a>  </td>
+                </tr>
+                <% } %>
+            </table>
+            <div class="config">
+                
+            </div>
+
+        </section>
+
+    </main>
+    <script src="https://code.iconify.design/2/2.1.1/iconify.min.js"></script>
+</body>
+</html>
