@@ -17,6 +17,9 @@ databaseUser.prototype.search = function(id,callback){
 databaseUser.prototype.change = function(data,callback){
     this.userConnection.query('UPDATE users SET ? WHERE id = ? ', [data, data.id], callback);
 }
+databaseUser.prototype.done = function(data,callback){
+    this.userConnection.query('UPDATE users SET ? WHERE id = ?',[data, data.id], callback);
+}
 
 module.exports = function() {
     return databaseUser

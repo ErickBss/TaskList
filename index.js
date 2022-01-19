@@ -25,14 +25,30 @@ app.get('/', (req,res) =>{
             console.log(error);
         }
         else{
-            var completed = success.map( function (item){
-                if(item.status === 'Completed'){
+            var pending = success.filter( function (item){
+                if(item.status == 'Pending'){
                     return item;
                 }
+              
             });
-            console.log(completed);
-            let size = Object.keys(success).length;
-            res.render('index.ejs', {'tasks': success, 'size':size} );
+            var proccess = success.filter( function (item){
+                if(item.status == 'In Proccess'){
+                    return item;
+                }
+              
+            });
+            var completed = success.filter( function (item){
+                if(item.status == 'Completed'){
+                    return item;
+                }
+              
+            });
+            
+            let size = Object.keys(pending).length;
+            let size2 = Object.keys(proccess).length;
+            let size3 = Object.keys(completed).length;
+
+           res.render('index.ejs', {'pending': pending, 'proccess': proccess, 'completed': completed, 'size':size, 'size2':size2,'size3':size3} ); 
         }
     });
 
@@ -90,6 +106,23 @@ app.post('/changes/:id', (req,res) =>{
         }
         res.redirect('/');
     }); 
+});
+
+app.post('/done/:id/', (req,res) => {
+    let id = req.params.id;
+    let data = {
+        id: id,
+        status:'Completed'
+    };
+
+    let connection = app.database.connection();
+    let databaseUser = new app.database.databaseUser(connection);
+    databaseUser.done(data,(error,success) => {
+        if(error){
+            console.log(error);
+        }
+        res.redirect('/');
+    });
 });
 
 /* Server Door */
