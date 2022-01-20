@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <link rel="stylesheet" href="css/index.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,35 +12,36 @@
 <body>
     <main>
         <section class="lists">
-
+        <h1>Pending Tasks</h1>
         <div class="lists list">
             <% for(x=0; x < size; x++ ){  %>
-                <form class="check" method="post" action="/done/<%= pending[x].id %>">       
+                <form class="check" method="post" action="/posts/done/<%= pending[x].id %>">       
                     <input onChange="this.form.submit()" id = "<%= pending[x].id %>" type="checkbox"/>
                     <label for="<%= pending[x].id %>"  class="task" ><%= pending[x].task %></label>
-                    <a href="/config/<%= pending[x].id %>">  <span class="iconify" data-icon="mdi:cog-outline" style="color: #fe4c6a;"></span>  </a>  
+                    <a href="/proccess/<%= pending[x].id %>">  <span class="iconify-inline" data-icon="mdi:arrow-down-bold-box" style="color: #fe4c6a;"></span>  </a>  
                 </form>
             <% } %>
         </div>
-            
+              <h1>In Proccess Tasks</h1>
         <div  class="lists list">
-                
+              
                 <% for(x=0; x < size2; x++ ){  %>
-                    <form class="check" method="post" action="/done/<%= proccess[x].id %>">       
+                    <form class="check" method="post" action="/posts/done/<%= proccess[x].id %>">       
                         <input  onChange="this.form.submit()" id = "<%= proccess[x].id %>" type="checkbox"/>
                         <label for="<%= proccess[x].id %>"  class="task" ><%= proccess[x].task %></label>
-                        <a href="/config/<%= proccess[x].id %>"> <span class="iconify" data-icon="mdi:cog-outline" style="color: #fe4c6a;"></span>  </a>  
+                        <a href="/pending/<%= proccess[x].id %>">  <span class="iconify" data-icon="mdi:arrow-up-bold-box" style="color: #fe4c6a;"></span>   </a>  
                     </form>
                 <% } %>
             </div>
-
+            <h1>Completed Tasks</h1> 
             <div  class="lists list">
-                 
+                
                 <% for(x=0; x < size3; x++ ){  %>
-                    <form class="uncheck" method="post" action="/done/<%= completed[x].id %>">       
+                    <form class="uncheck" method="post" action="/posts/undone/<%= completed[x].id %>">       
                         <input  onChange="this.form.submit()" id = "<%= completed[x].id %>" type="checkbox"/>
                         <label for="<%= completed[x].id %>"  class="task" ><%= completed[x].task %></label>
-                        <a href="/config/<%= completed[x].id %>"> <span class="iconify" data-icon="mdi:cog-outline" style="color: #fe4c6a;"></span>  </a>  
+                        <a href="/delete/<%= completed[x].id %>">  <span class="iconify" data-icon="mdi:delete-circle" style="color: red;"></span>   </a>   
+                        
                     </form>
                 <% } %>
             </div>
@@ -49,14 +50,15 @@
 
         </section>
         <section class="container"> 
-            <form class="addtask" method="post" action="/task">
+            <h1>Add new task</h1>
+            <form autocomplete="off" class="addtask" method="post" action="/posts/task">
                 <label class="field">
                     <input required type="text" name="task"/>
                 </label>
-                <input type="submit" value="Confirm Task"/>
+              <label for="submit"> <span class="iconify" data-icon="mdi:plus-circle" style="color: #fe4c6a;"></span>  </label>  
+              <input id="submit" type="submit"/>
     
             </form>
-
         </section>
             
 

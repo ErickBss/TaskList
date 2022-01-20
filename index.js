@@ -15,7 +15,7 @@ app.use(session({
     cookie: {maxAge:700000}
 }));
 
-/* ENTRIES */
+/* GETS */
 
 app.get('/', (req,res) =>{
     let connection = app.database.connection();
@@ -51,79 +51,31 @@ app.get('/', (req,res) =>{
            res.render('index.ejs', {'pending': pending, 'proccess': proccess, 'completed': completed, 'size':size, 'size2':size2,'size3':size3} ); 
         }
     });
-
-       
+      
 });
 
-app.post('/task', (req,res) => {
 
-    data= req.body.task;
-    let status = 'Pending';
-    var data = {
-        status: status,
-        task: data
-    };
- 
-    let connection = app.database.connection();
-    let databaseUser = new app.database.databaseUser(connection); 
-    databaseUser.register(data, (error, success) => {
-        if(error){
-            console.log(error);
-        }
-        res.redirect('/');
-    });
-
-});
-
-app.get('/config/:id', (req,res) =>{
+app.get('/delete/:id/', (req,res)=>{
+    let id= req.params.id;
     
-    let id = req.params.id;
-
     let connection = app.database.connection();
     let databaseUser = new app.database.databaseUser(connection);
-    databaseUser.search(id,(error,success) => {
-        if(error){
-            console.log(error);
-        }
-
-        res.render('config.ejs',{'tasks':success[0]});
-    });
-});
-
-app.post('/changes/:id', (req,res) =>{
-    let id = req.params.id;
-    let data = {
-        id: id,
-        status: req.body.status,
-        task : req.body.task
-    };
-
-    let connection = app.database.connection();
-    let databaseUser = new app.database.databaseUser(connection);
-    databaseUser.change(data,(error,success) =>{
-        if(error){
-            console.log(error);
-        }
-        res.redirect('/');
-    }); 
-});
-
-app.post('/done/:id/', (req,res) => {
-    let id = req.params.id;
-    let data = {
-        id: id,
-        status:'Completed'
-    };
-
-    let connection = app.database.connection();
-    let databaseUser = new app.database.databaseUser(connection);
-    databaseUser.done(data,(error,success) => {
+    databaseUser.delete(id,(error,success) => {
         if(error){
             console.log(error);
         }
         res.redirect('/');
     });
 });
+
+
+const next = require('./routes/nexts');
+app.use('/', next);
+
+const postRouter = require('./routes/posts');
+app.use('/posts', postRouter);
+
+
 
 /* Server Door */
 
