@@ -20,7 +20,7 @@ databaseUser.prototype.change = function(data,callback){
 databaseUser.prototype.done = function(data,callback){
     this.userConnection.query('UPDATE users SET ? WHERE id = ?',[data, data.id], callback);
 }
-databaseUser.prototype.proccess = function(data,callback){
+databaseUser.prototype.process = function(data,callback){
     this.userConnection.query('UPDATE users SET ? WHERE id = ?',[data, data.id], callback);
 }
 databaseUser.prototype.delete = function (id,callback){

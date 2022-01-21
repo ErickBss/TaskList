@@ -18,18 +18,18 @@
                 <form class="check" method="post" action="/posts/done/<%= pending[x].id %>">       
                     <input onChange="this.form.submit()" id = "<%= pending[x].id %>" type="checkbox"/>
                     <label for="<%= pending[x].id %>"  class="task" ><%= pending[x].task %></label>
-                    <a href="/proccess/<%= pending[x].id %>">  <span class="iconify-inline" data-icon="mdi:arrow-down-bold-box" style="color: #fe4c6a;"></span>  </a>  
+                    <a href="/process/<%= pending[x].id %>">  <span class="iconify-inline" data-icon="mdi:arrow-down-bold-box" style="color: #fe4c6a;"></span>  </a>  
                 </form>
             <% } %>
         </div>
-              <h1>In Proccess Tasks</h1>
+              <h1>In Process Tasks</h1>
         <div  class="lists list">
               
                 <% for(x=0; x < size2; x++ ){  %>
-                    <form class="check" method="post" action="/posts/done/<%= proccess[x].id %>">       
-                        <input  onChange="this.form.submit()" id = "<%= proccess[x].id %>" type="checkbox"/>
-                        <label for="<%= proccess[x].id %>"  class="task" ><%= proccess[x].task %></label>
-                        <a href="/pending/<%= proccess[x].id %>">  <span class="iconify" data-icon="mdi:arrow-up-bold-box" style="color: #fe4c6a;"></span>   </a>  
+                    <form class="check" method="post" action="/posts/done/<%= process[x].id %>">       
+                        <input  onChange="this.form.submit()" id = "<%= process[x].id %>" type="checkbox"/>
+                        <label for="<%= process[x].id %>"  class="task" ><%= process[x].task %></label>
+                        <a href="/pending/<%= process[x].id %>">  <span class="iconify" data-icon="mdi:arrow-up-bold-box" style="color: #fe4c6a;"></span>   </a>  
                     </form>
                 <% } %>
             </div>

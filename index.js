@@ -31,8 +31,8 @@ app.get('/', (req,res) =>{
                 }
               
             });
-            var proccess = success.filter( function (item){
-                if(item.status == 'In Proccess'){
+            var process = success.filter( function (item){
+                if(item.status == 'In Process'){
                     return item;
                 }
               
@@ -45,10 +45,10 @@ app.get('/', (req,res) =>{
             });
             
             let size = Object.keys(pending).length;
-            let size2 = Object.keys(proccess).length;
+            let size2 = Object.keys(process).length;
             let size3 = Object.keys(completed).length;
 
-           res.render('index.ejs', {'pending': pending, 'proccess': proccess, 'completed': completed, 'size':size, 'size2':size2,'size3':size3} ); 
+           res.render('index.ejs', {'pending': pending, 'process': process, 'completed': completed, 'size':size, 'size2':size2,'size3':size3} ); 
         }
     });
       
